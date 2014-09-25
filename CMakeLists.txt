@@ -363,15 +363,6 @@ install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/include/
         FILES_MATCHING PATTERN "*.hpp"
         PATTERN "Version.hpp" EXCLUDE)
 
-install(FILES
-        ${CMAKE_CURRENT_SOURCE_DIR}/deps/containers/simple_ptr.hpp
-	${CMAKE_CURRENT_SOURCE_DIR}/deps/containers/containers_fixes.hpp
-	${CMAKE_CURRENT_SOURCE_DIR}/deps/containers/exceptions.hpp
-	${CMAKE_CURRENT_SOURCE_DIR}/deps/containers/copy_functors.hpp
-	${CMAKE_CURRENT_SOURCE_DIR}/deps/containers/simple_ptr.tpp
-	DESTINATION include/opentxs/core/containers
-	COMPONENT dev)
-
 install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/deps/irrxml/
         DESTINATION include/irrxml
         COMPONENT dev
