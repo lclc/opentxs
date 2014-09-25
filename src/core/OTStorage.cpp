@@ -1025,7 +1025,7 @@ bool OTPacker::Unpack(PackedBuffer& inBuf, std::string& outObj)
 
 #define IMPLEMENT_GET_ADD_REMOVE(scope, name)                                  \
                                                                                \
-    typedef stlplus::simple_ptr_clone<name> PointerTo##name;                   \
+    typedef std::shared_ptr<name> PointerTo##name;                             \
                                                                                \
     typedef std::deque<PointerTo##name> listOf##name##s;                       \
                                                                                \
@@ -1038,7 +1038,7 @@ bool OTPacker::Unpack(PackedBuffer& inBuf, std::string& outObj)
     {                                                                          \
         if (nIndex < list_##name##s.size()) {                                  \
             PointerTo##name theP = list_##name##s.at(nIndex);                  \
-            return theP.pointer();                                             \
+            return theP.get();                                                 \
         }                                                                      \
         return nullptr;                                                        \
     }                                                                          \
@@ -1529,7 +1529,7 @@ void BufferPB::SetData(const uint8_t* pData, size_t theSize)
          it != list_##element_type##s.end(); ++it) {                           \
         PointerTo##element_type thePtr = (*it);                                \
         element_type##PB* pObject =                                            \
-            dynamic_cast<element_type##PB*>(thePtr.pointer());                 \
+            dynamic_cast<element_type##PB*>(thePtr.get());                     \
         OT_ASSERT(nullptr != pObject);                                         \
         ::google::protobuf::MessageLite* pMessage = pObject->getPBMessage();   \
         OT_ASSERT(nullptr != pMessage);                                        \

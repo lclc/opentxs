@@ -140,13 +140,11 @@
 
 #include "util/Assert.hpp"
 
-// credit:stlplus library.
-#include "containers/simple_ptr.hpp"
-
 #include <deque>
 #include <iostream>
 #include <vector>
 #include <map>
+#include <memory>
 #include <string>
 #include <cstdint>
 
@@ -879,7 +877,7 @@ const T * OT_DYNAMIC_CONST_CAST(const Storable* pObject)
 #ifdef SWIG // swig version
 #define DECLARE_GET_ADD_REMOVE(name)                                           \
 protected:                                                                     \
-    std::deque<stlplus::simple_ptr_clone<name>> list_##name##s;                \
+    std::deque<stlplus::shared_ptr<name>> list_##name##s;                      \
                                                                                \
 public:                                                                        \
     size_t Get##name##Count();                                                 \
@@ -892,7 +890,7 @@ public:                                                                        \
 
 #define DECLARE_GET_ADD_REMOVE(name)                                           \
 protected:                                                                     \
-    std::deque<stlplus::simple_ptr_clone<name>> list_##name##s;                \
+    std::deque<std::shared_ptr<name>> list_##name##s;                          \
                                                                                \
 public:                                                                        \
     EXPORT size_t Get##name##Count();                                          \
